@@ -24,23 +24,27 @@
       --radius-sm: 14px;
       --ring: 0 0 0 4px rgba(30, 58, 95, 0.18);
 
-      /* Axer brand colors - blue palette with hierarchy */
+      /* Axer brand colors - distinct palette for hierarchy */
       --axer-primary:#1e3a5f;
       --axer-primary-light:#e8f0f8;
       --axer-cta:#3b82f6;
       --axer-cta-hover:#2563eb;
       --axer-secondary:#64748B;
-      --axer-success:#1e3a5f;
-      --axer-warning:#ea580c;
-      --axer-accent:#2d4a6f;
+      --axer-success:#10b981;
+      --axer-success-light:#d1fae5;
+      --axer-warning:#f59e0b;
+      --axer-warning-light:#fef3c7;
+      --axer-accent:#6366f1;
+      --axer-accent-light:#e0e7ff;
       --axer-gray:#64748B;
+      --axer-live:#10b981;
 
       /* Legacy mappings */
       --primary:#1e3a5f;
-      --ok:#1e3a5f;
-      --warn:#ea580c;
-      --violet:#2d4a6f;
-      --orange:#ea580c;
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --violet:#6366f1;
+      --orange:#f59e0b;
       --gray:#64748B;
 
       /* Spacing rhythm */
@@ -163,9 +167,9 @@
       gap: 6px;
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(30, 58, 95, 0.08);
-      border: 1px solid rgba(30, 58, 95, 0.20);
-      color: var(--axer-success);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--axer-live);
       font-size: 11px;
       font-weight: 700;
       white-space: nowrap;
@@ -177,7 +181,7 @@
     .chip .pulse {
       width: 6px;
       height: 6px;
-      background: var(--axer-success);
+      background: var(--axer-live);
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
@@ -334,10 +338,10 @@
       white-space: nowrap;
       padding: 0 2px;
     }
-    .step.completed::before{ background: rgba(30, 58, 95, 0.4); }
+    .step.completed::before{ background: var(--axer-success); }
     .step.completed .dot{
       border-color: var(--axer-success);
-      background: rgba(30, 58, 95, 0.1);
+      background: var(--axer-success-light);
       color: var(--axer-success);
       animation: step-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -346,15 +350,15 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
-    .step.active::before{ background: rgba(30, 58, 95, 0.4); }
+    .step.active::before{ background: var(--axer-success); }
     .step.active .dot{
-      border-color: var(--axer-primary);
-      background: rgba(30, 58, 95, 0.08);
-      color: var(--axer-primary);
-      box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.1);
+      border-color: var(--axer-cta);
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--axer-cta);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
     }
-    .step.active .label{ color: var(--axer-primary); font-weight: 800; }
-    .step.completed .label{ color: var(--muted); }
+    .step.active .label{ color: var(--axer-cta); font-weight: 800; }
+    .step.completed .label{ color: var(--axer-success); font-weight: 600; }
 
     /* Technician card */
     .technician{
@@ -564,8 +568,8 @@
 
     /* Quote Section */
     .quote-section{
-      background: linear-gradient(135deg, rgba(30, 58, 95, 0.06), rgba(30, 58, 95, 0.02));
-      border: 1px solid rgba(30, 58, 95, 0.15);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(99, 102, 241, 0.02));
+      border: 2px solid rgba(99, 102, 241, 0.2);
       border-radius: 18px;
       padding: 18px;
       margin-bottom: var(--space-md);
@@ -579,7 +583,7 @@
     .quote-title{
       font-size: 14px;
       font-weight: 800;
-      color: var(--axer-primary);
+      color: var(--axer-accent);
       display:flex;
       align-items:center;
       gap: 8px;
@@ -732,9 +736,9 @@
     .quote-responded{
       text-align: center;
       padding: 14px;
-      background: rgba(30, 58, 95, 0.08);
+      background: rgba(16, 185, 129, 0.12);
       border-radius: 12px;
-      color: var(--axer-primary);
+      color: #10b981;
       font-weight: 800;
       font-size: 14px;
       display: flex;
@@ -747,7 +751,7 @@
       height: 20px;
     }
     .quote-responded.rejected{
-      background: rgba(239, 68, 68, 0.08);
+      background: rgba(239, 68, 68, 0.12);
       color: #DC2626;
     }
     .quote-trust{
@@ -812,9 +816,12 @@
       align-items: flex-end;
     }
     .chat-message.customer .chat-bubble{
-      background: #475569;
+      background: var(--axer-cta);
       color: #fff;
       border-bottom-right-radius: 4px;
+    }
+    .chat-message.customer .chat-time{
+      text-align: right;
     }
     .chat-message.technician{
       align-items: flex-start;
@@ -824,6 +831,7 @@
       color: var(--text);
       border: 1px solid var(--line);
       border-bottom-left-radius: 4px;
+      border-left: 3px solid var(--axer-primary);
     }
     .chat-time{
       font-size: 10px;
@@ -837,6 +845,24 @@
       color: var(--axer-primary);
       margin-bottom: 4px;
       padding: 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .chat-sender::before{
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--axer-primary);
+      border-radius: 50%;
+    }
+    .chat-sender-you{
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--axer-cta);
+      margin-bottom: 4px;
+      padding: 0 4px;
+      text-align: right;
     }
     .chat-input-container{
       display: flex;
@@ -1203,15 +1229,15 @@
       send: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`
     };
 
-    // Status config with friendly copy
+    // Status config with friendly copy and distinct colors
     const statusConfig = {
-      received:   { name: 'Recibido',           color: 'var(--axer-gray)',   icon: Icons.inbox,   hint: 'Tu equipo ya esta con nosotros. Pronto comenzamos el diagnostico.' },
-      diagnosing: { name: 'En diagnostico',     color: 'var(--axer-warning)', icon: Icons.search,  hint: 'Nuestros tecnicos estan revisando tu equipo. Te escribimos apenas tengamos el presupuesto.' },
-      quoted:     { name: 'Cotizado',           color: 'var(--axer-accent)', icon: Icons.tag,     hint: 'Ya tenemos el presupuesto listo. Revisalo abajo y apruebalo para continuar.' },
-      approved:   { name: 'Aprobado',           color: 'var(--axer-primary)',icon: Icons.check,   hint: 'Gracias por tu aprobacion. Comenzamos la reparacion muy pronto.' },
-      in_repair:  { name: 'En reparacion',      color: 'var(--axer-warning)',icon: Icons.wrench,  hint: 'Estamos trabajando en tu equipo. Te avisamos cuando este listo.' },
-      ready:      { name: 'Listo para entrega', color: 'var(--axer-success)',icon: Icons.spark,   hint: 'Tu equipo esta listo. Puedes pasar a recogerlo cuando quieras.' },
-      delivered:  { name: 'Entregado',          color: 'var(--axer-gray)',   icon: Icons.box,     hint: 'Reparacion completada. Gracias por tu confianza.' },
+      received:   { name: 'Recibido',           color: '#64748B',   icon: Icons.inbox,   hint: 'Tu equipo ya esta con nosotros. Pronto comenzamos el diagnostico.' },
+      diagnosing: { name: 'En diagnostico',     color: '#f59e0b',   icon: Icons.search,  hint: 'Nuestros tecnicos estan revisando tu equipo. Te escribimos apenas tengamos el presupuesto.' },
+      quoted:     { name: 'Cotizado',           color: '#6366f1',   icon: Icons.tag,     hint: 'Ya tenemos el presupuesto listo. Revisalo abajo y apruebalo para continuar.' },
+      approved:   { name: 'Aprobado',           color: '#10b981',   icon: Icons.check,   hint: 'Gracias por tu aprobacion. Comenzamos la reparacion muy pronto.' },
+      in_repair:  { name: 'En reparacion',      color: '#f59e0b',   icon: Icons.wrench,  hint: 'Estamos trabajando en tu equipo. Te avisamos cuando este listo.' },
+      ready:      { name: 'Listo para entrega', color: '#10b981',   icon: Icons.spark,   hint: 'Tu equipo esta listo. Puedes pasar a recogerlo cuando quieras.' },
+      delivered:  { name: 'Entregado',          color: '#64748B',   icon: Icons.box,     hint: 'Reparacion completada. Gracias por tu confianza.' },
     };
 
     // Device icons mapping
@@ -1519,9 +1545,9 @@
       const items = quote.items || [];
 
       const statusStyles = {
-        draft: { bg: 'rgba(148, 163, 184, 0.15)', color: 'var(--muted)', text: 'Borrador' },
-        sent: { bg: 'rgba(30, 58, 95, 0.15)', color: 'var(--axer-primary)', text: 'Pendiente' },
-        approved: { bg: 'rgba(30, 58, 95, 0.15)', color: 'var(--axer-primary)', text: 'Aprobada' },
+        draft: { bg: 'rgba(148, 163, 184, 0.15)', color: '#64748B', text: 'Borrador' },
+        sent: { bg: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', text: 'Pendiente' },
+        approved: { bg: 'rgba(16, 185, 129, 0.15)', color: '#10b981', text: 'Aprobada' },
         rejected: { bg: 'rgba(239, 68, 68, 0.15)', color: '#DC2626', text: 'Rechazada' }
       };
       const statusStyle = statusStyles[quote.status] || statusStyles.draft;
@@ -1598,7 +1624,7 @@
 
           return `
             <div class="chat-message ${msg.sender_type}">
-              ${!isCustomer ? `<div class="chat-sender">Taller</div>` : ''}
+              ${isCustomer ? `<div class="chat-sender-you">Tu</div>` : `<div class="chat-sender">Taller</div>`}
               <div class="chat-bubble">${escapeHtml(msg.content)}</div>
               <div class="chat-time">${dateStr}, ${timeStr}</div>
             </div>
@@ -1644,7 +1670,7 @@
 
           return `
             <div class="chat-message ${msg.sender_type}">
-              ${!isCustomer ? `<div class="chat-sender">Taller</div>` : ''}
+              ${isCustomer ? `<div class="chat-sender-you">Tu</div>` : `<div class="chat-sender">Taller</div>`}
               <div class="chat-bubble">${escapeHtml(msg.content)}</div>
               <div class="chat-time">${dateStr}, ${timeStr}</div>
             </div>
