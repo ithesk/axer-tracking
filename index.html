@@ -1888,6 +1888,56 @@
     }
 
     loadOrder();
+
+    // Polling: actualizar cada 30 segundos
+    let pollingInterval = null;
+    let lastUpdateTime = Date.now();
+
+    function startPolling() {
+      if (pollingInterval) return;
+      pollingInterval = setInterval(async () => {
+        try {
+          const token = getToken();
+          if (!token) return;
+
+          const res = await fetch(`${API_URL}/${token}`, { headers: { 'Accept': 'application/json' } });
+          if (!res.ok) return;
+
+          const order = await res.json();
+          if (order?.error) return;
+
+          // Solo actualizar si hay cambios
+          renderOrder(order);
+          lastUpdateTime = Date.now();
+          updateLiveIndicator();
+        } catch (e) {
+          console.log('Polling error:', e);
+        }
+      }, 30000); // 30 segundos
+    }
+
+    function updateLiveIndicator() {
+      const chip = document.querySelector('.chip');
+      if (chip) {
+        const seconds = Math.floor((Date.now() - lastUpdateTime) / 1000);
+        if (seconds < 60) {
+          chip.title = 'Actualizado hace ' + seconds + 's';
+        }
+      }
+    }
+
+    // Iniciar polling cuando la página está visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearInterval(pollingInterval);
+        pollingInterval = null;
+      } else {
+        loadOrder(); // Actualizar inmediatamente al volver
+        startPolling();
+      }
+    });
+
+    startPolling();
   </script>
 </body>
 </html>
