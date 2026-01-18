@@ -837,11 +837,12 @@
       outline: none;
       padding: 8px 10px;
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 16px; /* 16px prevents iOS auto-zoom on focus */
       resize: none;
       min-height: 20px;
       max-height: 80px;
       line-height: 1.4;
+      -webkit-appearance: none; /* Removes iOS input styling */
     }
     .chat-input::placeholder{
       color: var(--muted2);
